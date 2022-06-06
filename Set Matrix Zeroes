@@ -1,0 +1,58 @@
+class Solution {
+    public void setZeroes(int[][] matrix) {
+         int n=matrix.length;
+         int m=matrix[0].length;
+        /* ArrayList<Pair<Integer,Integer>>arr=new ArrayList(); 
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(matrix[i][j]==0)
+                {
+                    arr.add(new Pair(i,j));
+                }
+            }
+        }
+        for(Pair<Integer,Integer>p:arr)
+        {
+            int a=p.getKey();
+            int b=p.getValue();
+            setRow(matrix,a);
+            setCol(matrix,b);
+        }*/
+        boolean flag=true;
+        for(int i=0;i<n;i++)
+        {   if(matrix[i][0]==0)flag=false;
+            for(int j=1;j<m;j++)
+            {
+                if(matrix[i][j]==0)
+                {
+                    matrix[i][0]=matrix[0][j]=0;
+                }
+            }
+        }
+        for(int i=n-1;i>=0;i--)
+        {   
+            for(int j=m-1;j>0;j--)
+            {
+                if(matrix[i][0]==0||matrix[0][j]==0)
+                {
+                    matrix[i][j]=0;
+                }
+            }
+            if(!flag)matrix[i][0]=0;
+        }
+    }
+    private static void setRow(int mat[][],int i)
+    {
+       Arrays.fill(mat[i],0);
+    }
+    private static void setCol(int mat[][],int i)
+    {
+      int n=mat.length;
+        for(int j=0;j<n;j++)
+        {
+            mat[j][i]=0;
+        }
+    }
+}
