@@ -1,0 +1,32 @@
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        Comparator<int[]>c=(a,b)->a[0]-b[0];
+        Arrays.sort(intervals,c);
+        ArrayList<int[]>arr=new ArrayList();
+        int min=intervals[0][0];
+        int max=intervals[0][1];
+        for(int i=1;i<intervals.length;i++)
+        {
+            if(intervals[i][0]<=max)
+            {
+                max=Math.max(max,intervals[i][1]);
+            }
+            else{
+               int []ans=new int[2];
+                ans[0]=min;
+                ans[1]=max;
+                arr.add(ans);
+                min=intervals[i][0];
+                max=intervals[i][1];
+            }
+        }
+         int []ans=new int[2];
+                ans[0]=min;
+                ans[1]=max;
+                arr.add(ans);
+        int [][]res=new int[arr.size()][];
+        for(int i=0;i<arr.size();i++)
+            res[i]=arr.get(i);
+        return res;
+    }
+}
