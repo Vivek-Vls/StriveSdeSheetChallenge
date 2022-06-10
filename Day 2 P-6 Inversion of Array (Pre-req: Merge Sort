@@ -1,0 +1,58 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    private static long count=0;
+    public static long getInversions(long arr[], int n) {
+        mergeSort(arr,0,n-1);
+        return count;
+    }
+    private static void mergeSort(long []arr,int f,int l)
+    {   int mid=0;
+        if(f<l){
+           mid =(l+f)/2;
+            mergeSort(arr,f,mid);
+            mergeSort(arr,mid+1,l);
+            merge(arr,f,l);
+        }
+    }
+    private static void merge(long []arr,int f,int l)
+    {
+      long temp[]=new long [l-f+1];
+        int i=f;
+        int mid=(l+f)/2;
+        int j=mid+1;
+        int k=0;
+        while(i<=mid&&j<=l)
+        {
+            if(arr[i]<=arr[j])
+            {
+                temp[k]=arr[i];
+                i++;
+            }
+            else{
+                 temp[k]=arr[j];
+                count+=mid-i+1;
+                j++;
+            }
+            k++;
+        }
+        while(i<=mid)
+        {
+            temp[k]=arr[i];
+            i++;
+            k++;
+        }
+        while(j<=l)
+        {
+            temp[k]=arr[j];
+            j++;
+            k++;
+        }
+        i=0;
+        while(i<k)
+        {
+           arr[f+i]=temp[i];
+            i++;
+        }
+    }
+}
