@@ -1,0 +1,64 @@
+class Solution {
+   private int count=0;
+    public int reversePairs(int[] nums) {
+         mergeSort(nums,0,nums.length-1);
+        return count;
+    }
+     private void mergeSort(int []arr,int f,int l)
+    {   int mid=0;
+        if(f<l){
+           mid =(l+f)/2;
+            mergeSort(arr,f,mid);
+            mergeSort(arr,mid+1,l);
+            merge(arr,f,l);
+        }
+    }
+    private void merge(int []arr,int f,int l)
+    {
+      int temp[]=new int [l-f+1];
+        int i=f;
+        int mid=(l+f)/2;
+        int j=mid+1;
+        int k=0;
+        for(;i<=mid;i++)
+        {
+            while(j<=l&&arr[i]>2L*arr[j])
+                j++;
+            count+=j-mid-1;
+            
+        }
+        j=mid+1;
+        i=f;
+        while(i<=mid&&j<=l)
+        {
+            if(arr[i]<=arr[j])
+            {
+                temp[k]=arr[i];
+                i++;
+            }
+            else{
+                 temp[k]=arr[j];
+                 j++;
+            }
+            k++;
+        }
+        while(i<=mid)
+        {
+            temp[k]=arr[i];
+            i++;
+            k++;
+        }
+        while(j<=l)
+        {
+            temp[k]=arr[j];
+            j++;
+            k++;
+        }
+        i=0;
+        while(i<k)
+        {
+           arr[f+i]=temp[i];
+            i++;
+        }
+    }
+}
