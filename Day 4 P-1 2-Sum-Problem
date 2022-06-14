@@ -1,0 +1,23 @@
+class Solution {
+    public int[] twoSum(int[] num, int target) {
+        int[]nums=num.clone();
+        Arrays.sort(nums);
+        int l=0;
+        int h=nums.length-1;
+        while(l<h)
+        {
+            if(nums[l]+nums[h]==target)break;
+            else if(nums[l]+nums[h]>target)h--;
+            else l++;
+        }
+        int []arr=new int[2];
+       int k=0;
+        for(int i=0;i<num.length;i++)
+        {
+            if(num[i]==nums[l])arr[k++]=i;
+            else if(num[i]==nums[h])arr[k++]=i;
+        }
+        
+        return arr;
+    }
+}
