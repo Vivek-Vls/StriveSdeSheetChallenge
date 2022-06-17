@@ -1,0 +1,50 @@
+class GfG
+{
+    Node flatten(Node root)
+    {
+	  if(root==null||root.next==null)return root;
+	  Node temp=root.next;
+	  Node d=root;
+	  while(temp!=null)
+	  {
+	      Node prev=temp;
+	      temp=temp.next;
+	      d=mergeTwoLists(d,prev);
+	  }
+	  return d;
+    }
+    public Node mergeTwoLists(Node l1, Node l2) {
+        if(l1==null) return l2;
+       if(l2==null)return l1;
+       Node  head=new Node(5);
+       Node temp=head;
+       while(l1!=null||l2!=null)
+       {
+           if(l1!=null&&l2!=null)
+           {
+               if(l1.data<=l2.data)
+               {
+                   temp.bottom=l1;
+                   l1=l1.bottom;
+                   temp=temp.bottom;
+               }
+               else{
+                   temp.bottom=l2;
+                   l2=l2.bottom;
+                   temp=temp.bottom;
+               }
+           }
+           else if(l1!=null&&l2==null)
+           {
+                   temp.bottom=l1;
+                  break;
+           }
+         else if(l1==null&&l2!=null)
+           {
+                   temp.bottom=l2;
+                  break;
+           }
+       }
+     return head.bottom;
+    }
+}
