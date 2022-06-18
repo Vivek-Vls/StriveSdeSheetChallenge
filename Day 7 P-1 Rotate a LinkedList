@@ -1,0 +1,59 @@
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head==null)return null;
+        int n=getLength(head);
+        k%=n;
+        /*
+        int []arr=new int [n];
+        ListNode temp=head;
+        for(int i=0;i<n;i++)
+        {
+            if(head!=null)
+            {
+                arr[i]=head.val;
+                head=head.next;
+            }
+        }
+        arr=rotate(arr,k);
+        head=temp;
+        for(int i:arr)
+        {
+             if(head!=null){
+               head.val=i;
+               head=head.next;
+             }
+            
+        }
+        return temp;*/
+        k=n-k;
+        while(k-->1&&head!=null)
+        {
+            head=head.next;
+        }
+        ListNode temp=head.next;
+        head.next=null;
+        return temp;
+    }
+    private int getLength(ListNode head)
+    {
+        ListNode temp=head; 
+        int count=0;
+        while(head.next!=null)
+        {
+            count++;
+            head=head.next;
+        }
+        head.next=temp;
+        return ++count;
+    }
+     public int [] rotate(int[] nums, int k) {
+        int n=nums.length;
+        k%=n;
+        int []arr=new int[n];
+        for(int i=0;i<n;i++)
+        {
+            arr[(i+k)%n]=nums[i];
+        }
+        return arr;
+    }
+}
