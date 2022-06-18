@@ -1,0 +1,65 @@
+class Solution {
+    public Node copyRandomList(Node head) {
+       if(head==null)return null;
+        Node temp=head;
+        while(head!=null)
+        {   Node node=new Node(head.val);
+            node.next=head.next;
+            head.next=node;
+            head=node.next;
+        }
+        head=temp;
+        while(head!=null&&head.next!=null)
+        {
+            if(head.random!=null) 
+                head.next.random=head.random.next;
+            head=head.next.next;
+        }
+        head=temp;
+        Node dummy=new Node(1);
+        temp=dummy;
+        Node prev;
+        while(head!=null)
+        {
+            prev=head.next.next;
+            temp.next=head.next;
+            head.next=prev;
+            head=prev;
+            temp=temp.next;
+        }
+        
+        return dummy.next;
+    }
+}
+
+
+Second Solution **************************
+
+class Solution {
+    public Node copyRandomList(Node head) {
+       if(head==null)return null;
+        HashMap<Node,Node>mpp=new HashMap();
+        Node temp=head;
+        while(head!=null)
+        {
+            mpp.put(head,new Node(head.val));
+            head=head.next;
+        }
+        head=temp;
+        Node prev=null;
+        while(head!=null)
+        {
+            prev=mpp.get(head);
+            if(head.next==null)
+                prev.next=null;
+            else prev.next=mpp.get(head.next);
+            
+            if(head.random==null)
+                prev.random=null;
+            else prev.random=mpp.get(head.random);
+            prev=prev.next;
+            head=head.next;
+        }
+        return mpp.get(temp);
+    }
+}
