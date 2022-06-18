@@ -1,0 +1,25 @@
+class Solution {
+    public int trap(int[] height) {
+        int n=height.length;
+        int left=0;
+        int right=0;
+        int l=0;int h=n-1;
+        int sum=0;
+        while(l<h)
+        {
+            if(height[l]<=height[h])
+            {
+                if(left<height[l])left=height[l];
+                else sum+=left-height[l];
+                l++;
+            }
+            else{
+                if(right<height[h])right=height[h];
+                else sum+=right-height[h];
+                h--;
+            } 
+        }
+        return sum;
+        
+    }
+}
