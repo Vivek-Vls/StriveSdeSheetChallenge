@@ -1,0 +1,48 @@
+public class Solution
+{
+public static int findMinimumCoins(int amt)
+    {   int ans=0;
+        if(amt>=1000)
+        {
+          ans+=amt/1000;
+          amt%=1000;
+        }
+       if(amt>=500)
+        {
+          ans+=amt/500;
+          amt%=500;
+        }
+       if(amt>=100)
+        {
+          ans+=amt/100;
+          amt%=100;
+        }
+     if(amt>=50)
+        {
+          ans+=amt/50;
+          amt%=50;
+        }
+     if(amt>=20)
+        {
+          ans+=amt/20;
+          amt%=20;
+        }
+     if(amt>=10)
+        {
+          ans+=amt/10;
+          amt%=10;
+        }
+     if(amt>=5)
+        {
+          ans+=amt/5;
+          amt%=5;
+        }
+     if(amt>=2)
+        {
+          ans+=amt/2;
+          amt%=2;
+        }
+      ans+=amt;
+     return ans;
+    }
+}
