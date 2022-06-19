@@ -1,0 +1,62 @@
+class Pair {
+    public int s;
+    public int e;
+    Pair(int s,int e)
+    {
+        this.s=s;
+        this.e=e;
+    }
+}
+class Solution
+{
+    //Function to find the minimum number of platforms required at the
+    //railway station such that no train waits.
+    
+    static int findPlatform(int arr[], int dep[], int n)
+    {
+       ArrayList<Integer>res=new ArrayList();
+       int count=0;
+       Pair[]p=new Pair[n];
+       for(int i=0;i<n;i++)
+       {
+           p[i]=new Pair(arr[i],dep[i]);
+       }
+       Comparator<Pair>c=(a,b)->{
+           if(a.e>b.e)return 1;
+           return -1;
+       };
+       Arrays.sort(p,c);
+       count=1;
+       res.add(p[0].e);
+       for(int i=1;i<n;i++)
+       {
+           int a=binarySearch(res,p[i].s);
+           if(a==-1){
+               count++;
+               res.add(p[i].e);
+           }
+           else{
+               res.remove(a);
+               res.add(p[i].e);
+           }
+       }
+       return count;
+    }
+    private static int binarySearch(ArrayList<Integer>arr,int x)
+    {
+        if(arr.size()==0)return -1;
+        int l=0;int h=arr.size()-1;
+        int i=-1;
+        while(l<=h)
+        {
+            int mid=(l+h)/2;
+            if(arr.get(mid)<x){
+                i=mid;
+                l=mid+1;
+            }
+            else h=mid-1;
+        }
+        return i;
+    }
+}
+
