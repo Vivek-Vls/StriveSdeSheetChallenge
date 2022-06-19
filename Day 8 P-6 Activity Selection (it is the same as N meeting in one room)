@@ -1,0 +1,35 @@
+import java.util.*;
+class Pair {
+    public int s;
+    public int e;
+    Pair(int s,int e)
+    {
+        this.s=s;
+        this.e=e;
+    }
+}
+public class Solution {
+    public static int maximumActivities(List<Integer> start, List<Integer> end)     {
+       int n=start.size();
+       Pair[]arr=new Pair[n];
+       for(int i=0;i<n;i++)
+       {
+           arr[i]=new Pair(start.get(i),end.get(i));
+       }
+       Comparator<Pair>c=(a,b)->{
+           if(a.e>b.e)return 1;
+           return -1;
+       };
+       Arrays.sort(arr,c);
+        int e=arr[0].e;
+        int count=1;
+         for(int i=1;i<n;i++)
+        { 
+          if(arr[i].s>=e){
+                count++;
+                e=arr[i].e;
+           }
+       }
+          return count;
+    }
+}
