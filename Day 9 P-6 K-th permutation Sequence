@@ -1,0 +1,25 @@
+class Solution {
+    public String getPermutation(int n, int k) {
+        int f=1;
+        int i=1;
+        StringBuilder sb=new StringBuilder();
+        while(i<=n)
+        {
+            sb.append(i);
+            f*=i;
+            i++;
+        }
+        f/=n;
+        k--;
+        StringBuilder sb1=new StringBuilder();
+        while(sb.length()>0)
+        {
+          sb1.append(sb.charAt(k/f));
+          sb.deleteCharAt(k/f);
+          k%=f;
+          if(sb.length()>0)
+          f/=sb.length();
+        }
+        return sb1.toString();
+    }
+}
