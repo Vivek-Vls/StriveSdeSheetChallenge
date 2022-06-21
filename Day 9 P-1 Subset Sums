@@ -1,0 +1,17 @@
+class Solution{
+    ArrayList<Integer> subsetSums(ArrayList<Integer> arr, int n){
+       ArrayList<Integer> ans=new ArrayList();
+       helper(0,arr,n,0,ans);
+       return ans;
+        
+    }
+    private void helper(int i ,ArrayList<Integer>arr,int n,int sum,ArrayList<Integer>ans)
+    {
+        if(i==n){
+            ans.add(sum);
+            return ;
+        }
+        helper(i+1,arr,n,sum+arr.get(i),ans);
+        helper(i+1,arr,n,sum,ans);
+    }
+}
